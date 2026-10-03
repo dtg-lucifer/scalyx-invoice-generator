@@ -64,12 +64,12 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
         <div className="bg-white rounded-3xl border border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.08)] p-8 sm:p-10">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex size-14 rounded-2xl overflow-hidden shadow-sm mb-4 bg-slate-900 p-1.5 items-center justify-center">
+            <div className="inline-flex size-14 rounded-2xl overflow-hidden shadow-sm mb-4 shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/assets/scalyx_light.png"
+                src="/assets/scalyx_dark.png"
                 alt="Scalyx"
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-cover rounded-2xl"
               />
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-slate-900">
