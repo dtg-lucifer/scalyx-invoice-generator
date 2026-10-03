@@ -118,6 +118,18 @@ export default function InvoiceForm({
   const taxAmount = (subtotal * (Number(data.taxRate) || 0)) / 100;
   const grandTotal = subtotal + taxAmount;
 
+  const formatExactCurrency = (val: number) => {
+    if (val === undefined || val === null || isNaN(val)) return `${data.currencySymbol} 0.00`;
+    const strVal = val.toString();
+    const parts = strVal.split(".");
+    const intFormatted = Number(parts[0]).toLocaleString("en-IN");
+    if (parts.length > 1) {
+      const decimals = parts[1].length === 1 ? parts[1] + "0" : parts[1];
+      return `${data.currencySymbol} ${intFormatted}.${decimals}`;
+    }
+    return `${data.currencySymbol} ${intFormatted}.00`;
+  };
+
   return (
     <div className="space-y-6">
       {/* Quick Action Toolbar */}
@@ -304,7 +316,7 @@ export default function InvoiceForm({
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="font-mono font-bold text-emerald-400">
-                    {data.currencySymbol} {Number(item.cost).toLocaleString()}
+                    {formatExactCurrency(Number(item.cost))}
                   </span>
                   <button
                     type="button"
@@ -327,7 +339,7 @@ export default function InvoiceForm({
           </span>
           <div className="text-right">
             <span className="text-lg font-mono font-black text-white">
-              {data.currencySymbol} {grandTotal.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {formatExactCurrency(grandTotal)}
             </span>
           </div>
         </div>

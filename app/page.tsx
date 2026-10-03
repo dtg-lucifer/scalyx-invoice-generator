@@ -87,12 +87,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Brand Left */}
           <div className="flex items-center gap-3">
-            <div className="size-9 rounded-xl bg-slate-900 border border-slate-700/80 p-1 flex items-center justify-center">
+            <div className="size-9 rounded-xl overflow-hidden shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/scalyx_light.png"
                 alt="Scalyx"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover rounded-xl"
               />
             </div>
             <div>

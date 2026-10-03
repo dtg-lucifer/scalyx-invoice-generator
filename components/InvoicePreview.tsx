@@ -23,10 +23,19 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
         : "font-systemfont";
 
     const formatCurrency = (val: number) => {
-      return `${data.currencySymbol} ${val.toLocaleString("en-IN", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      })}`;
+      if (val === undefined || val === null || isNaN(val)) return `${data.currencySymbol} 0.00`;
+      
+      // Preserve exact decimals without any rounding off
+      const strVal = val.toString();
+      const parts = strVal.split(".");
+      const intFormatted = Number(parts[0]).toLocaleString("en-IN");
+      
+      if (parts.length > 1) {
+        const decimals = parts[1].length === 1 ? parts[1] + "0" : parts[1];
+        return `${data.currencySymbol} ${intFormatted}.${decimals}`;
+      }
+      
+      return `${data.currencySymbol} ${intFormatted}.00`;
     };
 
     return (
@@ -56,12 +65,13 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
               {/* Company Info */}
               <div className="max-w-[60%]">
                 <div className="flex items-center gap-3.5 mb-3">
-                  <div className="relative size-12 rounded-xl bg-slate-950 p-1.5 flex items-center justify-center shadow-md">
+                  {/* Logo with matching corner roundness and zero black border */}
+                  <div className="relative size-12 rounded-xl overflow-hidden shadow-xs shrink-0 bg-transparent">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={data.company.logoUrl}
                       alt={data.company.name}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover rounded-xl"
                     />
                   </div>
                   <div>
@@ -265,7 +275,7 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
                   scalyx.in
                 </a>
               </span>
-              <span>A4 Document • Page 1 of 1</span>
+              <span>Page 1 of 1</span>
             </div>
           </div>
         </div>
