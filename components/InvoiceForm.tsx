@@ -133,17 +133,17 @@ export default function InvoiceForm({
   return (
     <div className="space-y-6">
       {/* Quick Action Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-slate-900/90 border border-slate-800 rounded-2xl backdrop-blur-sm">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-4 bg-white border border-slate-200/90 rounded-2xl shadow-sm">
         <div className="flex items-center gap-2">
           {/* Font Dialog Trigger */}
           <button
             type="button"
             onClick={onOpenFontDialog}
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500 shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition-all hover:border-slate-300 shadow-2xs"
           >
-            <Type className="size-4 text-blue-400" />
+            <Type className="size-4 text-blue-600" />
             <span>Font:</span>
-            <span className="capitalize text-white bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-700 font-medium">
+            <span className="capitalize text-slate-900 bg-white px-2 py-0.5 rounded-md border border-slate-200 font-bold">
               {data.font}
             </span>
           </button>
@@ -153,7 +153,7 @@ export default function InvoiceForm({
             type="button"
             onClick={handleResetToSample}
             title="Load sample invoice data"
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/80 transition-all"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 transition-all shadow-2xs"
           >
             <RotateCcw className="size-3.5" />
             <span>Sample</span>
@@ -165,7 +165,7 @@ export default function InvoiceForm({
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 transition-all shadow-2xs"
           >
             <Printer className="size-4" />
             <span>Print</span>
@@ -175,7 +175,7 @@ export default function InvoiceForm({
             type="button"
             onClick={onDownloadPdf}
             disabled={isDownloading}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white shadow-lg shadow-blue-600/30 transition-all active:scale-95"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white shadow-sm transition-all active:scale-95"
           >
             {isDownloading ? (
               <>
@@ -193,28 +193,31 @@ export default function InvoiceForm({
       </div>
 
       {/* CORE REQUIREMENT: 2 Inputs for Item and Cost + Button to Add Record */}
-      <div className="p-5 bg-slate-900/90 border-2 border-blue-500/40 rounded-2xl shadow-xl shadow-blue-950/20 relative overflow-hidden">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-blue-500/20 text-blue-400">
+      <div className="p-6 bg-white border border-slate-200/90 rounded-3xl shadow-sm relative overflow-hidden">
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-blue-50 text-blue-600 border border-blue-100">
               <Plus className="size-4" />
             </div>
-            <h2 className="text-base font-bold text-white">Add Item to Invoice</h2>
+            <div>
+              <h2 className="text-base font-bold text-slate-900">Add Item to Invoice</h2>
+              <p className="text-xs text-slate-500">Enter item details and cost to add to the invoice</p>
+            </div>
           </div>
-          <span className="text-[11px] font-semibold text-blue-400 bg-blue-950/80 border border-blue-800/80 px-2.5 py-0.5 rounded-full">
+          <span className="text-[11px] font-semibold text-blue-700 bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full">
             2 Inputs Form
           </span>
         </div>
 
         <form onSubmit={handleAddItem} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             {/* Input 1: Item */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="item-name"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5"
+                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5"
               >
-                Item Name / Description <span className="text-blue-400">*</span>
+                Item Name / Description <span className="text-blue-600">*</span>
               </label>
               <input
                 ref={itemInputRef}
@@ -226,7 +229,7 @@ export default function InvoiceForm({
                   setItemInput(e.target.value);
                   if (inputError) setInputError("");
                 }}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 text-white placeholder-slate-500 text-sm transition-all"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 text-slate-900 placeholder:text-slate-400 text-sm transition-all outline-none"
               />
             </div>
 
@@ -234,9 +237,9 @@ export default function InvoiceForm({
             <div>
               <label
                 htmlFor="item-cost"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5"
+                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5"
               >
-                Cost ({data.currencySymbol}) <span className="text-blue-400">*</span>
+                Cost ({data.currencySymbol}) <span className="text-blue-600">*</span>
               </label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold">
@@ -253,20 +256,20 @@ export default function InvoiceForm({
                     setCostInput(e.target.value);
                     if (inputError) setInputError("");
                   }}
-                  className="w-full pl-8 pr-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 text-white placeholder-slate-500 text-sm font-mono transition-all"
+                  className="w-full pl-8 pr-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 text-slate-900 placeholder:text-slate-400 text-sm font-mono transition-all outline-none"
                 />
               </div>
             </div>
           </div>
 
           {inputError && (
-            <p className="text-xs text-rose-400 font-medium">{inputError}</p>
+            <p className="text-xs text-rose-600 font-medium">{inputError}</p>
           )}
 
           {/* Add Record Button */}
           <button
             type="submit"
-            className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 active:scale-[0.99] transition-all"
+            className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 active:scale-[0.99] transition-all"
           >
             <Plus className="size-4" />
             <span>Add Record to Invoice</span>
@@ -275,10 +278,10 @@ export default function InvoiceForm({
       </div>
 
       {/* Item Records Table & Live Total */}
-      <div className="p-5 bg-slate-900/90 border border-slate-800 rounded-2xl">
-        <div className="flex items-center justify-between mb-3">
+      <div className="p-6 bg-white border border-slate-200/90 rounded-3xl shadow-sm">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
               Invoice Records ({data.items.length})
             </h3>
           </div>
@@ -286,7 +289,7 @@ export default function InvoiceForm({
             <button
               type="button"
               onClick={handleClearItems}
-              className="text-xs text-rose-400 hover:text-rose-300 hover:underline transition-colors"
+              className="text-xs text-rose-600 hover:text-rose-700 hover:underline transition-colors font-medium"
             >
               Clear all
             </button>
@@ -294,35 +297,35 @@ export default function InvoiceForm({
         </div>
 
         {data.items.length === 0 ? (
-          <div className="text-center py-6 px-4 border border-dashed border-slate-800 rounded-xl bg-slate-950/40">
-            <p className="text-xs text-slate-400">
+          <div className="text-center py-8 px-4 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+            <p className="text-xs text-slate-500">
               No items in the invoice yet. Enter an item and cost above to add your first record!
             </p>
           </div>
         ) : (
-          <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
+          <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
             {data.items.map((item, idx) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between p-3 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-slate-700 transition-all text-xs"
+                className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 hover:bg-slate-100/60 transition-all text-xs"
               >
-                <div className="flex items-center gap-2.5 max-w-[65%]">
-                  <span className="text-slate-500 font-mono text-[11px]">
+                <div className="flex items-center gap-3 max-w-[65%]">
+                  <span className="text-slate-400 font-mono text-[11px]">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-medium text-slate-200 truncate">
+                  <span className="font-semibold text-slate-800 truncate">
                     {item.description}
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="font-mono font-bold text-emerald-400">
+                  <span className="font-mono font-bold text-slate-900">
                     {formatExactCurrency(Number(item.cost))}
                   </span>
                   <button
                     type="button"
                     onClick={() => handleRemoveItem(item.id)}
                     title="Remove item"
-                    className="p-1 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
                   >
                     <Trash2 className="size-3.5" />
                   </button>
@@ -333,12 +336,12 @@ export default function InvoiceForm({
         )}
 
         {/* Live Total Calculation Summary */}
-        <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+        <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
             Total Amount Due
           </span>
           <div className="text-right">
-            <span className="text-lg font-mono font-black text-white">
+            <span className="text-xl font-mono font-black text-slate-900">
               {formatExactCurrency(grandTotal)}
             </span>
           </div>
@@ -346,15 +349,15 @@ export default function InvoiceForm({
       </div>
 
       {/* Accordion / Tabbed Settings: Client, Invoice Meta, Company Details */}
-      <div className="p-5 bg-slate-900/90 border border-slate-800 rounded-2xl space-y-4">
-        <div className="flex border-b border-slate-800 gap-1 pb-2">
+      <div className="p-6 bg-white border border-slate-200/90 rounded-3xl shadow-sm space-y-4">
+        <div className="flex border-b border-slate-100 gap-1 pb-2">
           <button
             type="button"
             onClick={() => setActiveSection("client")}
             className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
               activeSection === "client"
-                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                : "text-slate-400 hover:text-slate-200"
+                ? "bg-blue-50 text-blue-700 border border-blue-200"
+                : "text-slate-500 hover:text-slate-800"
             }`}
           >
             <User className="size-3.5" />
@@ -366,8 +369,8 @@ export default function InvoiceForm({
             onClick={() => setActiveSection("meta")}
             className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
               activeSection === "meta"
-                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                : "text-slate-400 hover:text-slate-200"
+                ? "bg-blue-50 text-blue-700 border border-blue-200"
+                : "text-slate-500 hover:text-slate-800"
             }`}
           >
             <FileText className="size-3.5" />
@@ -379,8 +382,8 @@ export default function InvoiceForm({
             onClick={() => setActiveSection("company")}
             className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
               activeSection === "company"
-                ? "bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                : "text-slate-400 hover:text-slate-200"
+                ? "bg-blue-50 text-blue-700 border border-blue-200"
+                : "text-slate-500 hover:text-slate-800"
             }`}
           >
             <Building2 className="size-3.5" />
@@ -390,9 +393,9 @@ export default function InvoiceForm({
 
         {/* Client Details Section */}
         {activeSection === "client" && (
-          <div className="space-y-3">
+          <div className="space-y-3.5">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Client / Company Name
               </label>
               <input
@@ -405,13 +408,13 @@ export default function InvoiceForm({
                     client: { ...data.client, name: e.target.value },
                   })
                 }
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Client Email
                 </label>
                 <input
@@ -424,12 +427,12 @@ export default function InvoiceForm({
                       client: { ...data.client, email: e.target.value },
                     })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Client Phone
                 </label>
                 <input
@@ -442,13 +445,13 @@ export default function InvoiceForm({
                       client: { ...data.client, phone: e.target.value },
                     })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Client Address
               </label>
               <textarea
@@ -461,7 +464,7 @@ export default function InvoiceForm({
                     client: { ...data.client, address: e.target.value },
                   })
                 }
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
               />
             </div>
           </div>
@@ -469,54 +472,54 @@ export default function InvoiceForm({
 
         {/* Invoice Metadata Section */}
         {activeSection === "meta" && (
-          <div className="space-y-3">
+          <div className="space-y-3.5">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Invoice Number
                 </label>
                 <input
                   type="text"
                   value={data.invoiceNumber}
                   onChange={(e) => onChange({ ...data, invoiceNumber: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm font-mono text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-mono text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Issue Date
                 </label>
                 <input
                   type="date"
                   value={data.issueDate}
                   onChange={(e) => onChange({ ...data, issueDate: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Due Date
                 </label>
                 <input
                   type="date"
                   value={data.dueDate}
                   onChange={(e) => onChange({ ...data, dueDate: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Currency
                 </label>
                 <select
                   value={data.currency}
                   onChange={(e) => handleCurrencyChange(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 >
                   {CURRENCIES.map((c) => (
                     <option key={c.code} value={c.code}>
@@ -527,7 +530,7 @@ export default function InvoiceForm({
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Tax / GST Rate (%)
                 </label>
                 <div className="relative">
@@ -539,9 +542,9 @@ export default function InvoiceForm({
                     onChange={(e) =>
                       onChange({ ...data, taxRate: parseFloat(e.target.value) || 0 })
                     }
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs">
+                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs">
                     %
                   </span>
                 </div>
@@ -549,26 +552,26 @@ export default function InvoiceForm({
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Payment Details / Instructions
               </label>
               <input
                 type="text"
                 value={data.paymentDetails}
                 onChange={(e) => onChange({ ...data, paymentDetails: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Notes & Terms
               </label>
               <textarea
                 rows={2}
                 value={data.notes}
                 onChange={(e) => onChange({ ...data, notes: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
               />
             </div>
           </div>
@@ -576,20 +579,20 @@ export default function InvoiceForm({
 
         {/* Company Section (Scalyx) */}
         {activeSection === "company" && (
-          <div className="space-y-3">
-            <div className="p-3 bg-blue-950/40 border border-blue-800/40 rounded-xl text-xs text-blue-300 flex items-center justify-between">
+          <div className="space-y-3.5">
+            <div className="p-3.5 bg-blue-50/70 border border-blue-100 rounded-xl text-xs text-blue-900 flex items-center justify-between">
               <span>Fetched live from <strong>https://scalyx.in</strong></span>
               <button
                 type="button"
                 onClick={() => onChange({ ...data, company: SCALYX_DEFAULTS })}
-                className="text-[11px] underline hover:text-white"
+                className="text-[11px] underline hover:text-blue-700 font-semibold"
               >
                 Reset to Scalyx
               </button>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Company Name
               </label>
               <input
@@ -601,13 +604,13 @@ export default function InvoiceForm({
                     company: { ...data.company, name: e.target.value },
                   })
                 }
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Website Link
                 </label>
                 <input
@@ -619,12 +622,12 @@ export default function InvoiceForm({
                       company: { ...data.company, website: e.target.value },
                     })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Support Phone / WhatsApp
                 </label>
                 <input
@@ -636,13 +639,13 @@ export default function InvoiceForm({
                       company: { ...data.company, phone: e.target.value },
                     })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Company Tagline / Subtitle
               </label>
               <input
@@ -654,7 +657,7 @@ export default function InvoiceForm({
                     company: { ...data.company, tagline: e.target.value },
                   })
                 }
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:border-blue-500 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 focus:bg-white focus:border-blue-600 transition-colors outline-none"
               />
             </div>
           </div>
