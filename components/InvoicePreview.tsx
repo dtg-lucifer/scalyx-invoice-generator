@@ -223,7 +223,7 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
                   </div>
                 )}
 
-                <div className="flex justify-between py-3 border-t-2 border-slate-900 text-sm font-bold text-slate-900 bg-slate-50/80 px-3 rounded-lg">
+                <div className="flex justify-between py-3 border-t-2 border-slate-900 text-sm font-bold text-slate-900 bg-slate-50/80 px-3 rounded-none">
                   <span className="uppercase tracking-wider">Total Due</span>
                   <span className="font-mono text-base text-blue-600">
                     {formatCurrency(total)}
