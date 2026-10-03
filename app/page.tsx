@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col print:bg-white print:min-h-0 print:p-0 print:block">
       {/* Toast Notification */}
       {notification && (
         <div className="fixed top-20 right-6 z-50 animate-in slide-in-from-top-4 fade-in duration-200">
@@ -182,8 +182,8 @@ export default function Home() {
       </div>
 
       {/* Main Workspace Layout */}
-      <main className="flex-1 max-w-[1700px] w-full mx-auto p-4 sm:p-6 lg:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <main className="flex-1 max-w-[1700px] w-full mx-auto p-4 sm:p-6 lg:p-8 print:p-0 print:m-0 print:block print:max-w-none">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start print:block print:m-0 print:p-0">
           {/* Left Column: Form & Item Controls (5 cols) */}
           <div
             className={`lg:col-span-5 no-print ${
@@ -202,7 +202,7 @@ export default function Home() {
           {/* Right Column: Live A4 Document Preview (7 cols) */}
           <div
             ref={previewContainerRef}
-            className={`lg:col-span-7 flex flex-col items-center ${
+            className={`lg:col-span-7 flex flex-col items-center print:block print:p-0 print:m-0 ${
               mobileTab === "preview" ? "block" : "hidden lg:flex"
             }`}
           >
@@ -247,7 +247,7 @@ export default function Home() {
             </div>
 
             {/* A4 Sheet Container */}
-            <div className="w-full overflow-x-auto flex justify-center py-4 bg-slate-950/40 rounded-3xl border border-slate-800/40 shadow-inner">
+            <div className="w-full overflow-x-auto flex justify-center py-4 bg-slate-950/40 rounded-3xl border border-slate-800/40 shadow-inner print:p-0 print:m-0 print:bg-transparent print:border-none print:shadow-none print:block print:overflow-visible">
               <InvoicePreview data={invoiceData} scale={previewScale} />
             </div>
           </div>

@@ -34,7 +34,7 @@ export default function RootLayout({
       lang="en"
       className={`${roboto.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-900 text-slate-100">{children}</body>
+      <body className="min-h-full flex flex-col bg-slate-900 text-slate-100 print:bg-white print:text-black">{children}</body>
     </html>
   );
 }

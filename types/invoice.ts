@@ -1,3 +1,5 @@
+import { SCALYX_LOGO_BASE64 } from "@/lib/logoBase64";
+
 export type FontType = 'roboto' | 'poppins' | 'systemfont';
 
 export interface InvoiceItem {
@@ -40,7 +42,7 @@ export interface InvoiceData {
 
 export const SCALYX_DEFAULTS: CompanyDetails = {
   name: "Scalyx Solutions",
-  logoUrl: "/assets/scalyx_dark.png",
+  logoUrl: SCALYX_LOGO_BASE64,
   website: "https://scalyx.in",
   email: "contact@scalyx.in",
   phone: "+91-89271-24748",

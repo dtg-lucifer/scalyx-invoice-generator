@@ -35,7 +35,7 @@ export const InvoicePreview = forwardRef<HTMLDivElement, InvoicePreviewProps>(
           transform: scale !== 1 ? `scale(${scale})` : undefined,
           transformOrigin: "top center",
         }}
-        className="transition-transform duration-150"
+        className="invoice-scale-wrapper transition-transform duration-150"
       >
         <div
           ref={ref}

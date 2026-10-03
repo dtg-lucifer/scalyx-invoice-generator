@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 
 export async function exportInvoiceToPdf(elementId: string, filename: string): Promise<void> {
   const element = document.getElementById(elementId);
@@ -7,31 +7,43 @@ export async function exportInvoiceToPdf(elementId: string, filename: string): P
     throw new Error(`Element with id "${elementId}" not found`);
   }
 
-  // Create clone or render with optimal settings
-  const canvas = await html2canvas(element, {
-    scale: 2.5, // High resolution for clear text and logos
-    useCORS: true,
-    allowTaint: true,
-    backgroundColor: "#ffffff",
-    logging: false,
-    windowWidth: element.scrollWidth,
-    windowHeight: element.scrollHeight,
-  });
+  // Exact A4 dimensions in px at 96 DPI: 794 x 1123
+  const a4WidthPx = 794;
+  const a4HeightPx = 1123;
 
-  const imgData = canvas.toDataURL("image/jpeg", 0.98);
+  try {
+    const dataUrl = await toPng(element, {
+      width: a4WidthPx,
+      height: a4HeightPx,
+      pixelRatio: 2, // 2x high resolution
+      backgroundColor: "#ffffff",
+      skipFonts: true, // prevents font stylesheet parse error
+      cacheBust: true,
+      style: {
+        transform: "none",
+        transformOrigin: "top left",
+        margin: "0",
+        boxShadow: "none",
+      },
+    });
 
-  // A4 portrait: 210mm x 297mm
-  const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4",
-    compress: true,
-  });
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+      compress: true,
+    });
 
-  const pageWidth = 210;
-  const pageHeight = 297;
+    // A4 dimensions in mm
+    const pageWidth = 210;
+    const pageHeight = 297;
 
-  // Add the high-res image exactly filling A4 dimensions
-  pdf.addImage(imgData, "JPEG", 0, 0, pageWidth, pageHeight, undefined, "FAST");
-  pdf.save(filename.endsWith(".pdf") ? filename : `${filename}.pdf`);
+    pdf.addImage(dataUrl, "PNG", 0, 0, pageWidth, pageHeight, undefined, "FAST");
+    pdf.save(filename.endsWith(".pdf") ? filename : `${filename}.pdf`);
+  } catch (error) {
+    console.error("toPng generation failed, trying canvas fallback:", error);
+    // Fallback: If direct export failed, trigger clean window.print()
+    window.print();
+    throw new Error("Direct PDF download had an issue in your browser. Opened the clean print dialog (select 'Save as PDF').");
+  }
 }
